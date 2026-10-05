@@ -112,7 +112,7 @@ export const Expressions: EXPRESSION[] = []
 export const Configurations: CONFIGURATION[] = [
     [
         Declarations,
-        [[8, `{\${p}p, \${n}n}  \U+00d7  {0b\${b}, 0o\${o}, 0x\${x}, 0d\${d}}`]],
+        [[8, templateLiteral]],
         Expressions,
         [(p, i, n, E, b, o, x, e, d) => '']
     ]

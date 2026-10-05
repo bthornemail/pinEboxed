@@ -1,0 +1,180 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+properties:
+  id:
+    displayName: ID
+  title:
+    displayName: Title
+  kind:
+    displayName: Kind
+  layer:
+    displayName: Layer
+  status:
+    displayName: Status
+  spec:
+    displayName: Spec
+formulas:
+  folder: 'file.folder'
+  outgoing: 'file.links.length'
+  incoming: 'file.backlinks.length'
+  up_count: 'list(up).length'
+  down_count: 'list(down).length'
+  sources_count: 'list(sources).length'
+  code_count: 'list(code).length'
+  dimensions_count: 'list(dimensions).length'
+  symbols_count: 'list(symbols).length'
+  tags_count: 'list(tags).length'
+  has_up: 'list(up).length > 0'
+  has_down: 'list(down).length > 0'
+  has_sources: 'list(sources).length > 0'
+  has_code: 'list(code).length > 0'
+  is_spec: 'kind == "spec"'
+  is_source: 'kind == "source" or kind == "source-part"'
+  is_extension: 'kind == "extension"'
+  is_open: 'kind == "open"'
+  is_meta: 'kind == "meta"'
+  is_canonical: 'status == "canonical"'
+  is_draft: 'status == "draft"'
+  is_contested: 'status == "contested"'
+  is_root: 'kind == "root-index"'
+views:
+  - type: table
+    name: "All Notes"
+    order:
+      - file.name
+      - id
+      - kind
+      - layer
+      - status
+    filters:
+      and:
+        - 'file.inFolder("wiki")'
+        - 'file.ext == "md"'
+  - type: table
+    name: "Spec Notes"
+    order:
+      - id
+      - title
+      - layer
+      - status
+    filters:
+      and:
+        - 'kind == "spec"'
+  - type: table
+    name: "Source Notes"
+    order:
+      - id
+      - title
+      - status
+    filters:
+      and:
+        - 'kind == "source" or kind == "source-part"'
+  - type: table
+    name: "Extension Guides"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'kind == "extension"'
+  - type: table
+    name: "Open Threads"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'kind == "open"'
+  - type: table
+    name: "Meta"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'kind == "meta"'
+  - type: table
+    name: "By Layer"
+    order:
+      - layer
+      - id
+      - title
+    groupBy:
+      property: layer
+      direction: ASC
+  - type: table
+    name: "By Status"
+    order:
+      - status
+      - id
+      - title
+    groupBy:
+      property: status
+      direction: ASC
+  - type: table
+    name: "Canonical Only"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'status == "canonical"'
+  - type: table
+    name: "Drafts"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'status == "draft"'
+  - type: table
+    name: "With Sources"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(sources).length > 0'
+  - type: table
+    name: "With Code"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(code).length > 0'
+  - type: table
+    name: "With Dimensions"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(dimensions).length > 0'
+  - type: table
+    name: "With Symbols"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(symbols).length > 0'
+  - type: table
+    name: "Orphans (no up)"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(up).length == 0'
+        - 'kind != "root-index"'
+  - type: table
+    name: "Root"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'kind == "root-index"'

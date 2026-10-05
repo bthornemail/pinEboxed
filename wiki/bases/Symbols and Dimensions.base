@@ -1,0 +1,148 @@
+filters:
+  and:
+    - file.inFolder("wiki/spec")
+    - file.ext == "md"
+properties:
+  id:
+    displayName: ID
+  title:
+    displayName: Title
+  layer:
+    displayName: Layer
+  status:
+    displayName: Status
+  dimensions:
+    displayName: Dimensions
+  symbols:
+    displayName: Symbols
+formulas:
+  dimensions_count: 'list(dimensions).length'
+  symbols_count: 'list(symbols).length'
+  has_dimensions: 'list(dimensions).length > 0'
+  has_symbols: 'list(symbols).length > 0'
+  is_canonical: 'status == "canonical"'
+  is_draft: 'status == "draft"'
+  is_foundations: 'layer == "foundations"'
+  is_architecture: 'layer == "architecture"'
+  is_grammar: 'layer == "grammar"'
+  is_hardware: 'layer == "hardware"'
+  is_runtime: 'layer == "runtime"'
+  is_verification: 'layer == "verification"'
+  is_canonical_layer: 'layer == "meta"'
+  dimensions_list: 'list(dimensions).join(", ")'
+  symbols_list: 'list(symbols).join(", ")'
+views:
+  - type: table
+    name: "All Specs"
+    order:
+      - id
+      - title
+      - layer
+      - status
+  - type: table
+    name: "Foundations"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'layer == "foundations"'
+  - type: table
+    name: "Architecture"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'layer == "architecture"'
+  - type: table
+    name: "Grammar"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'layer == "grammar"'
+  - type: table
+    name: "Hardware"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'layer == "hardware"'
+  - type: table
+    name: "Runtime"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'layer == "runtime"'
+  - type: table
+    name: "Verification"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'layer == "verification"'
+  - type: table
+    name: "Canonical"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'status == "canonical"'
+  - type: table
+    name: "Drafts"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'status == "draft"'
+  - type: table
+    name: "With Dimensions"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(dimensions).length > 0'
+  - type: table
+    name: "With Symbols"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(symbols).length > 0'
+  - type: table
+    name: "By Layer"
+    order:
+      - layer
+      - id
+      - title
+    groupBy:
+      property: layer
+      direction: ASC
+  - type: table
+    name: "Dimensions Used"
+    order:
+      - dimensions_list
+      - id
+      - title
+    filters:
+      and:
+        - 'list(dimensions).length > 0'
+  - type: table
+    name: "Symbols Used"
+    order:
+      - symbols_list
+      - id
+      - title
+    filters:
+      and:
+        - 'list(symbols).length > 0'

@@ -1,0 +1,76 @@
+filters:
+  and:
+    - file.inFolder("wiki/spec/60-verification")
+    - file.ext == "md"
+properties:
+  id:
+    displayName: ID
+  title:
+    displayName: Title
+  status:
+    displayName: Status
+formulas:
+  is_tests: 'id == "SPEC-60"'
+  is_status: 'id == "SPEC-61"'
+  is_draft: 'status == "draft"'
+  is_canonical: 'status == "canonical"'
+  sources_count: 'list(sources).length'
+  code_count: 'list(code).length'
+  dimensions_count: 'list(dimensions).length'
+  symbols_count: 'list(symbols).length'
+  tags_count: 'list(tags).length'
+views:
+  - type: table
+    name: "Verification"
+    order:
+      - file.name
+      - id
+      - title
+  - type: table
+    name: "Test Vectors"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'id == "SPEC-60"'
+  - type: table
+    name: "Implementation Status"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'id == "SPEC-61"'
+  - type: table
+    name: "Drafts"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'status == "draft"'
+  - type: table
+    name: "Canonical"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'status == "canonical"'
+  - type: table
+    name: "With Sources"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(sources).length > 0'
+  - type: table
+    name: "With Code"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(code).length > 0'

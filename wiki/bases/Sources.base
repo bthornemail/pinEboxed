@@ -1,0 +1,146 @@
+filters:
+  and:
+    - file.inFolder("wiki/sources")
+    - file.ext == "md"
+properties:
+  id:
+    displayName: ID
+  title:
+    displayName: Title
+  kind:
+    displayName: Kind
+  status:
+    displayName: Status
+  part:
+    displayName: Part
+  parts:
+    displayName: Parts
+  parent:
+    displayName: Parent
+  lines:
+    displayName: Lines
+  extracted:
+    displayName: Extracted
+  extraction:
+    displayName: Extraction
+formulas:
+  is_part: 'kind == "source-part"'
+  is_moc: 'kind == "source"'
+  has_parent: 'parent != null'
+  has_parts: 'number(parts) > 1'
+  is_extracted: 'extraction == "pdftotext-layout"'
+  is_canonical: 'status == "canonical"'
+  is_draft: 'status == "draft"'
+  source_id: 'source_id'
+  tags_count: 'list(tags).length'
+  covers_count: 'list(covers).length'
+  code_count: 'list(code).length'
+  dimensions_count: 'list(dimensions).length'
+  symbols_count: 'list(symbols).length'
+views:
+  - type: table
+    name: "All Sources"
+    order:
+      - file.name
+      - id
+      - kind
+      - status
+  - type: table
+    name: "Source MOCs"
+    order:
+      - id
+      - title
+      - status
+    filters:
+      and:
+        - 'kind == "source"'
+  - type: table
+    name: "Source Parts"
+    order:
+      - id
+      - title
+      - part
+    filters:
+      and:
+        - 'kind == "source-part"'
+  - type: table
+    name: "By Status"
+    order:
+      - status
+      - id
+      - title
+    groupBy:
+      property: status
+      direction: ASC
+  - type: table
+    name: "Canonical"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'status == "canonical"'
+  - type: table
+    name: "Drafts"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'status == "draft"'
+  - type: table
+    name: "Extracted"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'extraction == "pdftotext-layout"'
+  - type: table
+    name: "With Covers"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(covers).length > 0'
+  - type: table
+    name: "With Code"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(code).length > 0'
+  - type: table
+    name: "With Dimensions"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(dimensions).length > 0'
+  - type: table
+    name: "With Symbols"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(symbols).length > 0'
+  - type: table
+    name: "Multi-Part"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'number(parts) > 1'
+  - type: table
+    name: "Source Index"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'id == "SRC-99"'

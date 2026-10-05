@@ -1,0 +1,111 @@
+filters:
+  and:
+    - file.inFolder("wiki/open")
+    - file.ext == "md"
+properties:
+  id:
+    displayName: ID
+  title:
+    displayName: Title
+  status:
+    displayName: Status
+formulas:
+  is_contradictions: 'id == "OPEN-00"'
+  is_questions: 'id == "OPEN-01"'
+  is_bugs: 'id == "OPEN-02"'
+  is_glossary: 'id == "OPEN-03"'
+  is_discarded: 'id == "OPEN-04"'
+  is_canonical: 'status == "canonical"'
+  is_draft: 'status == "draft"'
+  tags_count: 'list(tags).length'
+  sources_count: 'list(sources).length'
+  code_count: 'list(code).length'
+  dimensions_count: 'list(dimensions).length'
+  symbols_count: 'list(symbols).length'
+views:
+  - type: table
+    name: "All Open Threads"
+    order:
+      - file.name
+      - id
+      - title
+  - type: table
+    name: "Contradictions"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'id == "OPEN-00"'
+  - type: table
+    name: "Open Questions"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'id == "OPEN-01"'
+  - type: table
+    name: "Broken Code"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'id == "OPEN-02"'
+  - type: table
+    name: "Glossary"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'id == "OPEN-03"'
+  - type: table
+    name: "Discarded Claims"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'id == "OPEN-04"'
+  - type: table
+    name: "Canonical"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'status == "canonical"'
+  - type: table
+    name: "With Sources"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(sources).length > 0'
+  - type: table
+    name: "With Code"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(code).length > 0'
+  - type: table
+    name: "With Dimensions"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(dimensions).length > 0'
+  - type: table
+    name: "With Symbols"
+    order:
+      - id
+      - title
+    filters:
+      and:
+        - 'list(symbols).length > 0'
