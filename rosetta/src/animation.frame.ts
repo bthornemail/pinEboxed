@@ -261,3 +261,13 @@ Base36 is used as a compact human - readable orbit label.
 15 triples of type { β, γ, γ }: { 1, 2, 3 }, { 1, 4, 5 }, { 1, 8, 9 }, { 1, 16, 17 }, { 1, 30, 31 }, { 2, 4, 6 }, { 2, 8, 10 }, { 2, 16, 18 }, { 2, 29, 31 }, { 4, 8, 12 }, { 4, 16, 20 }, { 4, 27, 31 }, { 8, 16, 24 }, { 8, 23, 31 }, { 15, 16, 31 }
 
 
+
+function fibonacci(num: number): number {
+    if (num <= 1) {
+        return 1;
+    }
+    return fibonacci(num - 1) + fibonacci(num - 2);
+}
+export const XOR = fibonacci((1 ^ 3 ^ 5 ^ 7 ^ 9) ^ (0 ^ 2 ^ 4 ^ 6 ^ 8) &
+    (0xA ^ 0xB ^ 0xC ^ 0xD ^ 0xE ^ 0xF) ^ (0xA ^ 0xB ^ 0xC ^ 0xD ^ 0xE ^ 0xF) ^ (0xA ^ 0xB ^ 0xC ^ 0xD ^ 0xE ^ 0xF) &
+    (0 ^ -1 ^ -2 ^ -3 ^ -4 ^ -5 ^ -6 ^ -7 ^ -8 ^ -9) ^ (0 ^ 1 ^ 2 ^ 3 ^ 4 ^ 5 ^ 6 ^ 7 ^ 8 ^ 9) ^ (0 ^ 1 ^ 2 ^ 3 ^ 4 ^ 5 ^ 6 ^ 7 ^ 8 ^ 9) ^ (0 ^ -1 ^ -2 ^ -3 ^ -4 ^ -5 ^ -6 ^ -7 ^ -8 ^ -9));

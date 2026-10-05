@@ -262,12 +262,3 @@ function delta16(ruler: Buffer) {
     ruler.set(state, 8);
     return ruler;
 }
-function fibonacci(num: number): number {
-    if (num <= 1) {
-        return 1;
-    }
-    return fibonacci(num - 1) + fibonacci(num - 2);
-}
-export const XOR = fibonacci((1 ^ 3 ^ 5 ^ 7 ^ 9) ^ (0 ^ 2 ^ 4 ^ 6 ^ 8) &
-    (0xA ^ 0xB ^ 0xC ^ 0xD ^ 0xE ^ 0xF) ^ (0xA ^ 0xB ^ 0xC ^ 0xD ^ 0xE ^ 0xF) ^ (0xA ^ 0xB ^ 0xC ^ 0xD ^ 0xE ^ 0xF) &
-    (0 ^ -1 ^ -2 ^ -3 ^ -4 ^ -5 ^ -6 ^ -7 ^ -8 ^ -9) ^ (0 ^ 1 ^ 2 ^ 3 ^ 4 ^ 5 ^ 6 ^ 7 ^ 8 ^ 9) ^ (0 ^ 1 ^ 2 ^ 3 ^ 4 ^ 5 ^ 6 ^ 7 ^ 8 ^ 9) ^ (0 ^ -1 ^ -2 ^ -3 ^ -4 ^ -5 ^ -6 ^ -7 ^ -8 ^ -9));
