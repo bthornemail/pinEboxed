@@ -102,7 +102,7 @@ export const CIRCUITS: Record<string, CircuitData> = {
       { from: 'Q1', to: 'GND', label: 'emitter' },
       { from: 'Q3', to: 'GND', label: 'emitter' },
       { from: 'Q4', to: 'Q5', label: 'OR-like' },
-      { id: 'Q5', to: 'GND', label: 'emitter' },
+      { from: 'Q5', to: 'GND', label: 'emitter' },
       { from: 'LED', to: 'RLED', label: 'current limit' },
       { from: 'RLED', to: 'GND', label: 'return' },
     ],

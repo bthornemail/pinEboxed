@@ -1,4 +1,4 @@
-import { CircuitData, CircuitComponent, CircuitEdge } from './CircuitData';
+import { CircuitData } from './CircuitData';
 
 export function renderCircuitSVG(circuit: CircuitData): string {
   const w = 800;
