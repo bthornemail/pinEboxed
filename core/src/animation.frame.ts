@@ -261,6 +261,39 @@ Base36 is used as a compact human - readable orbit label.
 15 triples of type { β, γ, γ }: { 1, 2, 3 }, { 1, 4, 5 }, { 1, 8, 9 }, { 1, 16, 17 }, { 1, 30, 31 }, { 2, 4, 6 }, { 2, 8, 10 }, { 2, 16, 18 }, { 2, 29, 31 }, { 4, 8, 12 }, { 4, 16, 20 }, { 4, 27, 31 }, { 8, 16, 24 }, { 8, 23, 31 }, { 15, 16, 31 }
 
 
+function lucasRecursive(n) {
+    if (n === 0) return 2;
+    if (n === 1) return 1;
+    return lucasRecursive(n - 1) + lucasRecursive(n - 2);
+}
+
+// Test the recursive function
+console.log(lucasRecursive(10)); // Output: 123
+
+
+// Iterative function to find nth Lucas Number
+
+function lucas(n) {
+    // Base values for positions 0 and 1
+    let a = 2, b = 1, c;
+
+    if (n === 0) {
+        return a;
+    }
+
+    // Generating Lucas number for position n
+    for (let i = 2; i <= n; i++) {
+        c = a + b;
+        a = b;
+        b = c;
+    }
+
+    return b;
+}
+
+// Example: Compute the 9th Lucas number
+let n = 9;
+console.log(lucas(n));
 
 function fibonacci(num: number): number {
     if (num <= 1) {
