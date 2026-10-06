@@ -45,7 +45,7 @@ function stripCodeBlocks(text) {
   return text.replace(/```[\s\S]*?```/g, '').replace(/`[^`]*`/g, '');
 }
 
-const files = walk(WIKI).filter(f => !f.includes('/raw/') && !f.includes('/.obsidian/'));
+const files = walk(WIKI).filter(f => !f.includes('/raw/') && !f.includes('/.obsidian/') && !f.includes('/plugins/'));
 const notes = new Map();
 const errors = [];
 

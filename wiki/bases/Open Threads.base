@@ -2,6 +2,19 @@ filters:
   and:
     - file.inFolder("wiki/open")
     - file.ext == "md"
+formulas:
+  is_contradictions: id == "OPEN-00"
+  is_questions: id == "OPEN-01"
+  is_bugs: id == "OPEN-02"
+  is_glossary: id == "OPEN-03"
+  is_discarded: id == "OPEN-04"
+  is_canonical: status == "canonical"
+  is_draft: status == "draft"
+  tags_count: list(tags).length
+  sources_count: list(sources).length
+  code_count: list(code).length
+  dimensions_count: list(dimensions).length
+  symbols_count: list(symbols).length
 properties:
   id:
     displayName: ID
@@ -9,103 +22,90 @@ properties:
     displayName: Title
   status:
     displayName: Status
-formulas:
-  is_contradictions: 'id == "OPEN-00"'
-  is_questions: 'id == "OPEN-01"'
-  is_bugs: 'id == "OPEN-02"'
-  is_glossary: 'id == "OPEN-03"'
-  is_discarded: 'id == "OPEN-04"'
-  is_canonical: 'status == "canonical"'
-  is_draft: 'status == "draft"'
-  tags_count: 'list(tags).length'
-  sources_count: 'list(sources).length'
-  code_count: 'list(code).length'
-  dimensions_count: 'list(dimensions).length'
-  symbols_count: 'list(symbols).length'
 views:
   - type: table
-    name: "All Open Threads"
+    name: All Open Threads
     order:
       - file.name
       - id
       - title
   - type: table
-    name: "Contradictions"
+    name: Contradictions
+    filters:
+      and:
+        - id == "OPEN-00"
     order:
       - id
       - title
-    filters:
-      and:
-        - 'id == "OPEN-00"'
   - type: table
-    name: "Open Questions"
+    name: Open Questions
+    filters:
+      and:
+        - id == "OPEN-01"
     order:
       - id
       - title
-    filters:
-      and:
-        - 'id == "OPEN-01"'
   - type: table
-    name: "Broken Code"
+    name: Broken Code
+    filters:
+      and:
+        - id == "OPEN-02"
     order:
       - id
       - title
-    filters:
-      and:
-        - 'id == "OPEN-02"'
   - type: table
-    name: "Glossary"
+    name: Glossary
+    filters:
+      and:
+        - id == "OPEN-03"
     order:
       - id
       - title
-    filters:
-      and:
-        - 'id == "OPEN-03"'
   - type: table
-    name: "Discarded Claims"
+    name: Discarded Claims
+    filters:
+      and:
+        - id == "OPEN-04"
     order:
       - id
       - title
-    filters:
-      and:
-        - 'id == "OPEN-04"'
   - type: table
-    name: "Canonical"
+    name: Canonical
+    filters:
+      and:
+        - status == "canonical"
     order:
       - id
       - title
-    filters:
-      and:
-        - 'status == "canonical"'
   - type: table
-    name: "With Sources"
+    name: With Sources
+    filters:
+      and:
+        - list(sources).length > 0
     order:
       - id
       - title
-    filters:
-      and:
-        - 'list(sources).length > 0'
   - type: table
-    name: "With Code"
+    name: With Code
+    filters:
+      and:
+        - list(code).length > 0
     order:
       - id
       - title
-    filters:
-      and:
-        - 'list(code).length > 0'
   - type: table
-    name: "With Dimensions"
+    name: With Dimensions
+    filters:
+      and:
+        - list(dimensions).length > 0
     order:
       - id
       - title
-    filters:
-      and:
-        - 'list(dimensions).length > 0'
   - type: table
-    name: "With Symbols"
+    name: With Symbols
+    filters:
+      and:
+        - list(symbols).length > 0
     order:
       - id
       - title
-    filters:
-      and:
-        - 'list(symbols).length > 0'

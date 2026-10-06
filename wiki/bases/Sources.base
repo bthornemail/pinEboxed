@@ -2,6 +2,20 @@ filters:
   and:
     - file.inFolder("wiki/sources")
     - file.ext == "md"
+formulas:
+  is_part: kind == "source-part"
+  is_moc: kind == "source"
+  has_parent: parent != null
+  has_parts: number(parts) > 1
+  is_extracted: extraction == "pdftotext-layout"
+  is_canonical: status == "canonical"
+  is_draft: status == "draft"
+  source_id: source_id
+  tags_count: list(tags).length
+  covers_count: list(covers).length
+  code_count: list(code).length
+  dimensions_count: list(dimensions).length
+  symbols_count: list(symbols).length
 properties:
   id:
     displayName: ID
@@ -23,124 +37,110 @@ properties:
     displayName: Extracted
   extraction:
     displayName: Extraction
-formulas:
-  is_part: 'kind == "source-part"'
-  is_moc: 'kind == "source"'
-  has_parent: 'parent != null'
-  has_parts: 'number(parts) > 1'
-  is_extracted: 'extraction == "pdftotext-layout"'
-  is_canonical: 'status == "canonical"'
-  is_draft: 'status == "draft"'
-  source_id: 'source_id'
-  tags_count: 'list(tags).length'
-  covers_count: 'list(covers).length'
-  code_count: 'list(code).length'
-  dimensions_count: 'list(dimensions).length'
-  symbols_count: 'list(symbols).length'
 views:
   - type: table
-    name: "All Sources"
+    name: All Sources
     order:
       - file.name
       - id
       - kind
       - status
   - type: table
-    name: "Source MOCs"
+    name: Source MOCs
+    filters:
+      and:
+        - kind == "source"
     order:
       - id
       - title
       - status
+  - type: table
+    name: Source Parts
     filters:
       and:
-        - 'kind == "source"'
-  - type: table
-    name: "Source Parts"
+        - kind == "source-part"
     order:
       - id
       - title
       - part
-    filters:
-      and:
-        - 'kind == "source-part"'
   - type: table
-    name: "By Status"
+    name: By Status
+    groupBy:
+      property: status
+      direction: ASC
     order:
       - status
       - id
       - title
-    groupBy:
-      property: status
-      direction: ASC
   - type: table
-    name: "Canonical"
+    name: Canonical
+    filters:
+      and:
+        - status == "canonical"
     order:
       - id
       - title
+  - type: table
+    name: Drafts
     filters:
       and:
-        - 'status == "canonical"'
-  - type: table
-    name: "Drafts"
+        - status == "draft"
     order:
       - id
       - title
+  - type: table
+    name: Extracted
     filters:
       and:
-        - 'status == "draft"'
-  - type: table
-    name: "Extracted"
+        - extraction == "pdftotext-layout"
     order:
       - id
       - title
+  - type: table
+    name: With Covers
     filters:
       and:
-        - 'extraction == "pdftotext-layout"'
-  - type: table
-    name: "With Covers"
+        - list(covers).length > 0
     order:
       - id
       - title
+  - type: table
+    name: With Code
     filters:
       and:
-        - 'list(covers).length > 0'
-  - type: table
-    name: "With Code"
+        - list(code).length > 0
     order:
       - id
       - title
+  - type: table
+    name: With Dimensions
     filters:
       and:
-        - 'list(code).length > 0'
-  - type: table
-    name: "With Dimensions"
+        - list(dimensions).length > 0
     order:
       - id
       - title
+  - type: table
+    name: With Symbols
     filters:
       and:
-        - 'list(dimensions).length > 0'
-  - type: table
-    name: "With Symbols"
+        - list(symbols).length > 0
     order:
       - id
       - title
+  - type: table
+    name: Multi-Part
     filters:
       and:
-        - 'list(symbols).length > 0'
-  - type: table
-    name: "Multi-Part"
+        - number(parts) > 1
     order:
       - id
       - title
+  - type: table
+    name: Source Index
     filters:
       and:
-        - 'number(parts) > 1'
-  - type: table
-    name: "Source Index"
+        - id == "SRC-99"
     order:
       - id
       - title
-    filters:
-      and:
-        - 'id == "SRC-99"'
