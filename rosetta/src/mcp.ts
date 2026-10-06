@@ -33,34 +33,3 @@ document.modelContext.registerTool({..., inputSchema: newInputSchema});
 // and the execution might encounter any requisite errors due to the mismatch.
 const [tool] = await document.modelContext.getTools();
 document.modelContext.executeTool(tool, {a: 10});
-
-// global scope
-const e = 10;
-function sum(a) {
-  return function sum2(b) {
-    return function sum3(c) {
-      // outer functions scope
-      return function sum4(d) {
-        // local scope
-        return a + b + c + d + e;
-      };
-    };
-  };
-}
-
-const sum2 = sum(1);
-const sum3 = sum2(2);
-const sum4 = sum3(3);
-const result = sum4(4);
-console.log(result); // 20
-
-function MyObject(name, message) {
-  this.name = name.toString();
-  this.message = message.toString();
-}
-MyObject.prototype.getName = function () {
-  return this.name;
-};
-MyObject.prototype.getMessage = function () {
-  return this.message;
-};
